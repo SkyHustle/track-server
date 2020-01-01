@@ -1,9 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const mongoUri = require('../mongoUri');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
+app.use(authRoutes);
 
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
