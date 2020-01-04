@@ -18,7 +18,7 @@ mongoose.connect(mongoUri, {
 });
 
 mongoose.connection.on('connected', () => {
-  console.log('Connected to mongo instance');
+  console.log('Connected to mongo instance!');
 });
 
 mongoose.connection.on('error', (err) => {
