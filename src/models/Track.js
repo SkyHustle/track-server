@@ -14,7 +14,7 @@ const pointSchema = new mongoose.Schema({
 
 const trackSchema = new mongoose.Schema({
   userId: {
-    type: mongooseSchema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
   name: {
@@ -25,3 +25,5 @@ const trackSchema = new mongoose.Schema({
 });
 
 mongoose.model('Track', trackSchema);
+
+// We don't want/need to tie pointSchema into Mongo because we don't need a collection of points being saved to mongo, these point are a part of a Track.
