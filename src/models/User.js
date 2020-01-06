@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
   }
 });
 
+// using a 'function' bc the value of this is the user we are operating on. If we use an ()=>{} the value of this is going to refer to the context of this file
 userSchema.pre('save', function(next) {
   const user = this;
   if(!user.isModified('password')) {
@@ -33,5 +34,23 @@ userSchema.pre('save', function(next) {
     });
   });
 });
+
+userSchema.methods.comparePassword = function(candidatePassword) {
+  const user = this;
+
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(candidatePassword, user.password, (err, isMatch) => {
+      if (err) {
+        return reject(err);
+      }
+
+      if (!isMatch) {
+        return reject(false);
+      }
+
+      resolve(true);
+    });
+  });
+}
 
 mongoose.model('User', userSchema);
