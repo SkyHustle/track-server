@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
 module.exports = (req, res, next) => {
+  //express lowercases any header names from requests
   const { authorization } = req.headers;
 
   if (!authorization) {
